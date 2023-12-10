@@ -1,39 +1,59 @@
 import numpy as np
 
-# f = open("aoc04TestText.txt")
-f = open("aoc04Text.txt")
+# f = open("test-text-1.txt")
+f = open("text-1.txt")
 
 # print(f.read())
 cards = []
 result = 0
 
-for l in f:
-    data1,data2 = l.split(": ")[1].split(" | ")
-    data1 = data1.replace("  "," ").replace("\n", "").split(" ")
-    data2 = data2.replace("  "," ").replace("\n", "").split(" ")
-    if data1[0] == "":
-        data1 = data1[1:]
-    if data2[0] == "":
-        data2 = data2[1:]
-    cards.append([data1,data2])
+times = f.readline().split(": ")[1].replace("\n", "").split(" ")
+dists = f.readline().split(": ")[1].replace("\n", "").split(" ")
 
-for card in cards:
-    nix = np.isin(card[0], card[1])
-    print(nix)
-    counted = np.count_nonzero(nix)
-    print(counted)
-    if counted > 0:
-        res = 1
-        for i in range(counted-1):
-            res *= 2
-        result += res
-    print(res)
+times = [elem for elem in times if elem != ""]
+dists = [elem for elem in dists if elem != ""]
 
-print(result)
-          
+print(f"times: {times}")
+print(f"dists: {dists}")
+
+data = []
+for i in range(len(times)):
+    data.append([times[i], dists[i]])
+
+print(f"data: {data}")
+
+results = []
+
+for elem in data:
+    print(f"elem: {elem}")
+    for waitTime in range(int(elem[0])):
+        res = (float(elem[0]) - waitTime) * waitTime
+        
+        if res > float(elem[1]):
+            result += 1
+    results.append(result)
+    result = 0
+    print(results)
+    
+
+# for elemIndex in times:
+#     for i in range(times[elemIndex] - 1):
+        
+
+#         if i < times[i]:
+#             result += 1
 
 
-# dataDict = [[None][None]]
+
+# res = speed * time - waitTime
 
 
-# print(f.readline())
+
+result = 1
+for val in results:
+    result *= val
+
+print(f"result: {result}")
+
+
+
