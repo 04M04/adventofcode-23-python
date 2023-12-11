@@ -29,7 +29,7 @@ while(all([False for elem in lastPaths if elem[2] == "Z"])):
         # print(foundPaths)
         for lastPath in lastPaths:
             # print(lastPaths)
-            # print(f"lastPath: {lastPath}")
+            print(f"lastPath: {lastPath}")
             # print([elem for elem in positions if elem[2] == lastPath])
             foundCorner = [pos for pos in positions if pos[0] == lastPath][0]
             
